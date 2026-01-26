@@ -1,6 +1,3 @@
-//ISR Retenido - ISR retenido del mes
-//Comprar y gastos facturados del mes
-
 'use client';
 import { useState } from 'react';
 
@@ -9,7 +6,7 @@ const meses = [
   'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'
 ];
 
-export default function Home() {
+export default function Page() {
 const [form, setForm] = useState({
   fecha: '',
   rfc: '',
