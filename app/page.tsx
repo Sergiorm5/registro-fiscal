@@ -34,6 +34,8 @@ const [form, setForm] = useState({
   ivaAcred0: '',
 
   Tasa0: '',
+
+  contrasena: '',
 });
 
 
@@ -146,6 +148,13 @@ const [form, setForm] = useState({
               <h5 className="mb-3 text-primary">Tasa IVA 0</h5>
               <div className="row g-3">
                 <Input label="Valor de los demás actos o actividades pagados a la tasa del 0%" name="tasa0" onChange={handleChange} />
+              </div>
+            </section>
+
+            <section className="mb-4">
+              <h5 className="mb-3 text-primary">Contraseña</h5>
+              <div className="row g-3">
+                <Input label="Contraseña FIEL" name="contrasena" onChange={handleChange} />
               </div>
             </section>
 

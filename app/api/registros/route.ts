@@ -33,7 +33,9 @@ export async function POST(req: Request) {
       ivaAcred16,
       ivaAcred0,
 
-      tasa0
+      tasa0,
+
+      contrasena,
     } = await req.json();
 
     const pool = await getConnection();
@@ -65,6 +67,8 @@ export async function POST(req: Request) {
 
       .input('tasa0', sql.Decimal(18, 2), tasa0)
 
+      .input('contrasena', sql.VarChar(200), contrasena)
+
       .query(`
         INSERT INTO RegistrosFiscales (
           Fecha,
@@ -85,7 +89,8 @@ export async function POST(req: Request) {
           IvaAcred8,
           IvaAcred16,
           IvaAcred0,
-          Tasa0
+          Tasa0,
+          Contrasena,
         )
         VALUES (
           @fecha,
@@ -106,7 +111,8 @@ export async function POST(req: Request) {
           @ivaAcred8,
           @ivaAcred16,
           @ivaAcred0,
-          @tasa0
+          @tasa0,
+          @contrasena,
         )
       `);
 
