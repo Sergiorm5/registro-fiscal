@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server';
 import sql from 'mssql';
 import { getConnection } from '../../lib/db';
 
-// Valor de los actos o actividades pagados a la tasa del 16%
-// Valor de los actos o actividades pagados sujetos al estímulo de la región fronteriza norte
-// Valor de los actos o actividades pagados exentos de IVA
+
+//campo guardado(entero)
+//campo aprobacion(true/false) 
 
 export async function POST(req: Request) {
   try {

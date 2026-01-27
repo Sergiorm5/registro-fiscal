@@ -154,7 +154,7 @@ const [form, setForm] = useState({
             <section className="mb-4">
               <h5 className="mb-3 text-primary">Contraseña</h5>
               <div className="row g-3">
-                <Input label="Contraseña FIEL" name="contrasena" onChange={handleChange} />
+                <Input type="text" label="Contraseña FIEL" name="contrasena" onChange={handleChange} />
               </div>
             </section>
 
