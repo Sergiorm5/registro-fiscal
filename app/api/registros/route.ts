@@ -68,53 +68,87 @@ export async function POST(req: Request) {
       .input('tasa0', sql.Decimal(18, 2), tasa0)
 
       .input('contrasena', sql.VarChar(200), contrasena)
-
+      
       .query(`
-        INSERT INTO RegistrosFiscales (
-          Fecha,
-          RFC,
-          Periodo,
-          Ingresos,
-          Gastos,
-          ComprasGastosFacturados,
-          IsrRetenidoMes,
-          ActosRegionFronteriza,
-          ActosTasa16,
-          ActosPagadosTasa16,
-          ActosPagadosRegionFronteriza,
-          ActosPagadosExentos,
-          IvaCargo8,
-          IvaCargo16,
-          IvaCargo0,
-          IvaAcred8,
-          IvaAcred16,
-          IvaAcred0,
-          Tasa0,
-          Contrasena,
-        )
-        VALUES (
-          @fecha,
-          @rfc,
-          @periodo,
-          @ingresos,
-          @gastos,
-          @comprasGastosFacturados,
-          @isrRetenidoMes,
-          @actosRegionFronteriza,
-          @actosTasa16,
-          @actosPagadosTasa16,
-          @actosPagadosRegionFronteriza,
-          @actosPagadosExentos,
-          @ivaCargo8,
-          @ivaCargo16,
-          @ivaCargo0,
-          @ivaAcred8,
-          @ivaAcred16,
-          @ivaAcred0,
-          @tasa0,
-          @contrasena,
-        )
+      IF EXISTS (SELECT 1 FROM RegistrosFiscales WHERE RFC = @rfc)
+      BEGIN
+          UPDATE RegistrosFiscales
+          SET
+              Fecha = @fecha,
+              Periodo = @periodo,
+              Ingresos = @ingresos,
+              Gastos = @gastos,
+              ComprasGastosFacturados = @comprasGastosFacturados,
+              IsrRetenidoMes = @isrRetenidoMes,
+              ActosRegionFronteriza = @actosRegionFronteriza,
+              ActosTasa16 = @actosTasa16,
+              ActosPagadosTasa16 = @actosPagadosTasa16,
+              ActosPagadosRegionFronteriza = @actosPagadosRegionFronteriza,
+              ActosPagadosExentos = @actosPagadosExentos,
+              IvaCargo8 = @ivaCargo8,
+              IvaCargo16 = @ivaCargo16,
+              IvaCargo0 = @ivaCargo0,
+              IvaAcred8 = @ivaAcred8,
+              IvaAcred16 = @ivaAcred16,
+              IvaAcred0 = @ivaAcred0,
+              Tasa0 = @tasa0,
+              Contrasena = @contrasena,
+              guardado = 1
+          WHERE RFC = @rfc;
+      END
+      ELSE
+      BEGIN
+          INSERT INTO RegistrosFiscales (
+              Fecha,
+              RFC,
+              Periodo,
+              Ingresos,
+              Gastos,
+              ComprasGastosFacturados,
+              IsrRetenidoMes,
+              ActosRegionFronteriza,
+              ActosTasa16,
+              ActosPagadosTasa16,
+              ActosPagadosRegionFronteriza,
+              ActosPagadosExentos,
+              IvaCargo8,
+              IvaCargo16,
+              IvaCargo0,
+              IvaAcred8,
+              IvaAcred16,
+              IvaAcred0,
+              Tasa0,
+              Contrasena,
+              guardado,
+              aprobacion
+          )
+          VALUES (
+              @fecha,
+              @rfc,
+              @periodo,
+              @ingresos,
+              @gastos,
+              @comprasGastosFacturados,
+              @isrRetenidoMes,
+              @actosRegionFronteriza,
+              @actosTasa16,
+              @actosPagadosTasa16,
+              @actosPagadosRegionFronteriza,
+              @actosPagadosExentos,
+              @ivaCargo8,
+              @ivaCargo16,
+              @ivaCargo0,
+              @ivaAcred8,
+              @ivaAcred16,
+              @ivaAcred0,
+              @tasa0,
+              @contrasena,
+              1,
+              0
+          );
+      END
       `);
+
 
     return NextResponse.json({
       message: 'Registro guardado correctamente',
