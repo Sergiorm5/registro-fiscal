@@ -101,11 +101,6 @@ const [form, setForm] = useState({
                   name="isrRetenidoMes"
                   onChange={handleChange}
                 />
-                <Input
-                  label="Compras y Gastos del Mes"
-                  name="comprasGastosFacturados"
-                  onChange={handleChange}
-                />
               </div>
             </section>
 
@@ -116,12 +111,12 @@ const [form, setForm] = useState({
               </h5>
               <div className="row g-3">
                 <Input
-                  label="Actos sujetos al estímulo Región Fronteriza Norte"
+                  label="Valor de los actos o actividades gravados sujetos al estímulo de la región fronteriza"
                   name="actosRegionFronteriza"
                   onChange={handleChange}
                 />
                 <Input
-                  label="Valor de actos gravados a la tasa del 16%"
+                  label="Valor de los actos o actividades pagados a la tasa del 16%"
                   name="actosTasa16"
                   onChange={handleChange}
                 />
@@ -140,42 +135,17 @@ const [form, setForm] = useState({
                   onChange={handleChange}
                 />
                 <Input
-                  label="Actos pagados sujetos al estímulo Región Fronteriza Norte"
+                  label="Valor de los actos o actividades pagados sujetos al estímulo de la región fronteriza"
                   name="actosPagadosRegionFronteriza"
                   onChange={handleChange}
                 />
-                <Input
-                  label="Actos pagados exentos de IVA"
-                  name="actosPagadosExentos"
-                  onChange={handleChange}
-                />
-              </div>
-            </section>
-
-            {/* IVA CARGO */}
-            <section className="mb-4">
-              <h5 className="mb-3 text-primary">IVA a Cargo</h5>
-              <div className="row g-3">
-                <Input label="IVA 8%" name="ivaCargo8" onChange={handleChange} />
-                <Input label="IVA 16%" name="ivaCargo16" onChange={handleChange} />
-                <Input label="IVA 0%" name="ivaCargo0" onChange={handleChange} />
-              </div>
-            </section>
-
-            {/* IVA ACREDITABLE */}
-            <section className="mb-4">
-              <h5 className="mb-3 text-primary">IVA Acreditable</h5>
-              <div className="row g-3">
-                <Input label="IVA 8%" name="ivaAcred8" onChange={handleChange} />
-                <Input label="IVA 16%" name="ivaAcred16" onChange={handleChange} />
-                <Input label="IVA 0%" name="ivaAcred0" onChange={handleChange} />
               </div>
             </section>
 
             <section className="mb-4">
               <h5 className="mb-3 text-primary">Tasa IVA 0</h5>
               <div className="row g-3">
-                <Input label="Tasa 0%" name="tasa0" onChange={handleChange} />
+                <Input label="Valor de los demás actos o actividades pagados a la tasa del 0%" name="tasa0" onChange={handleChange} />
               </div>
             </section>
 
