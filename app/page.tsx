@@ -85,8 +85,8 @@ const [form, setForm] = useState({
             <section className="mb-4">
               <h5 className="mb-3 text-primary">Ingresos y Gastos</h5>
               <div className="row g-3">
-                <Input label="Ingresos" name="ingresos" onChange={handleChange} />
-                <Input label="Gastos" name="gastos" onChange={handleChange} />
+                <Input label="Ingresos del mes" name="ingresos" onChange={handleChange} />
+                <Input label="Compras y gastos del periodo" name="gastos" onChange={handleChange} />
               </div>
             </section>
 
