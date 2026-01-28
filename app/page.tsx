@@ -33,7 +33,7 @@ const [form, setForm] = useState({
   ivaAcred16: '',
   ivaAcred0: '',
 
-  Tasa0: '',
+  tasa0: '',
 
   contrasena: '',
 });
@@ -52,7 +52,10 @@ const [form, setForm] = useState({
       body: JSON.stringify(
         Object.fromEntries(
           Object.entries(form).map(([k, v]) =>
-            k === 'fecha' || k === 'rfc' || k === 'periodo'
+            k === 'fecha' ||
+            k === 'rfc' ||
+            k === 'periodo' ||
+            k === 'contrasena'
               ? [k, v]
               : [k, Number(v)]
           )

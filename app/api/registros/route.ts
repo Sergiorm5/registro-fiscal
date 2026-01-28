@@ -67,7 +67,7 @@ export async function POST(req: Request) {
 
       .input('tasa0', sql.Decimal(18, 2), tasa0)
 
-      .input('contrasena', sql.VarChar(200), contrasena)
+      .input('contrasena', sql.VarChar(), contrasena)
       
       .query(`
       IF EXISTS (SELECT 1 FROM RegistrosFiscales WHERE RFC = @rfc)
