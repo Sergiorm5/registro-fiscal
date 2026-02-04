@@ -45,8 +45,8 @@ const [form, setForm] = useState({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    await fetch('/api/registros', {
+  
+    const response = await fetch('/api/registros', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(
@@ -62,9 +62,17 @@ const [form, setForm] = useState({
         )
       ),
     });
-
-    alert('Registro guardado correctamente');
+  
+    const data = await response.json();
+  
+    if (!response.ok) {
+      alert(data.error || 'Ocurrió un error al guardar');
+      return;
+    }
+  
+    alert(data.message || 'Registro guardado correctamente');
   };
+
 
   return (
     <main className="min-vh-100 bg-light d-flex justify-content-center align-items-start p-4">

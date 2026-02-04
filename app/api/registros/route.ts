@@ -6,6 +6,7 @@ import { getConnection } from '../../lib/db';
 //campo guardado(entero)
 //campo aprobacion(true/false) 
 
+
 export async function POST(req: Request) {
   try {
     const {
@@ -40,6 +41,24 @@ export async function POST(req: Request) {
 
     const pool = await getConnection();
 
+    // 🔍 Validar que el RFC exista en tb_clientes
+    const existeCliente = await pool
+      .request()
+      .input('rfc', sql.VarChar(15), rfc)
+      .query(`
+        SELECT 1
+        FROM tb_clientes
+        WHERE rfc = @rfc
+      `);
+    
+    if (existeCliente.recordset.length === 0) {
+      return NextResponse.json(
+        { error: 'El RFC no existe en la tabla de clientes' },
+        { status: 400 }
+      );
+    }
+
+
     await pool.request()
       .input('fecha', sql.Date, fecha)
       .input('rfc', sql.VarChar(13), rfc)
@@ -67,7 +86,7 @@ export async function POST(req: Request) {
 
       .input('tasa0', sql.Decimal(18, 2), tasa0)
 
-      .input('contrasena', sql.VarChar(), contrasena)
+      .input('contrasena', sql.VarChar(255), contrasena)
       
       .query(`
       IF EXISTS (SELECT 1 FROM RegistrosFiscales WHERE RFC = @rfc)
