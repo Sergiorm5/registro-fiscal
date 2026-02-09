@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import sql from 'mssql';
 import { getConnection } from '../../lib/db';
-
+ 
 
 //campo guardado(entero)
 //campo aprobacion(true/false) 
@@ -18,6 +18,7 @@ export async function POST(req: Request) {
       gastos,
       comprasGastosFacturados,
       isrRetenidoMes,
+      iva_retenido,
 
       actosRegionFronteriza,
       actosTasa16,
@@ -68,6 +69,7 @@ export async function POST(req: Request) {
       .input('gastos', sql.Decimal(18, 2), gastos)
       .input('comprasGastosFacturados', sql.Decimal(18, 2), comprasGastosFacturados)
       .input('isrRetenidoMes', sql.Decimal(18, 2), isrRetenidoMes)
+      .input('iva_retenido', sql.Decimal(18, 2), iva_retenido)
 
       .input('actosRegionFronteriza', sql.Decimal(18, 2), actosRegionFronteriza)
       .input('actosTasa16', sql.Decimal(18, 2), actosTasa16)
@@ -99,6 +101,7 @@ export async function POST(req: Request) {
               Gastos = @gastos,
               ComprasGastosFacturados = @comprasGastosFacturados,
               IsrRetenidoMes = @isrRetenidoMes,
+              iva_retenido = @iva_retenido,
               ActosRegionFronteriza = @actosRegionFronteriza,
               ActosTasa16 = @actosTasa16,
               ActosPagadosTasa16 = @actosPagadosTasa16,
@@ -125,6 +128,7 @@ export async function POST(req: Request) {
               Gastos,
               ComprasGastosFacturados,
               IsrRetenidoMes,
+              iva_retenido,
               ActosRegionFronteriza,
               ActosTasa16,
               ActosPagadosTasa16,
@@ -149,6 +153,7 @@ export async function POST(req: Request) {
               @gastos,
               @comprasGastosFacturados,
               @isrRetenidoMes,
+              @iva_retenido,
               @actosRegionFronteriza,
               @actosTasa16,
               @actosPagadosTasa16,

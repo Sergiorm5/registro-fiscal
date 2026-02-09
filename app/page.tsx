@@ -17,6 +17,7 @@ const [form, setForm] = useState({
   
   comprasGastosFacturados: '',
   isrRetenidoMes: '',
+  iva_retenido: '',
 
   actosRegionFronteriza: '',
   actosTasa16: '',
@@ -112,6 +113,11 @@ const [form, setForm] = useState({
                 <Input
                   label="ISR Retenido del Mes"
                   name="isrRetenidoMes"
+                  onChange={handleChange}
+                />
+                <Input
+                  label="IVA Retenido"
+                  name="iva_retenido"
                   onChange={handleChange}
                 />
               </div>
