@@ -6,39 +6,48 @@ const meses = [
   'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'
 ];
 
+const conceptosIngresos = [
+  'Actividad empresarial',
+  'Servicios profesionales (Honorarios)',
+  'Actividades agrícolas, ganaderas, silvícolas o pesqueras',
+  'Enajenación de activos fijos y terrenos de su propiedad afectos a su actividad',
+  'Uso o goce temporal de bienes'
+];
+
 export default function Page() {
-const [form, setForm] = useState({
-  fecha: '',
-  rfc: '',
-  periodo: '',
-  
-  ingresos: '',
-  gastos: '',
-  
-  comprasGastosFacturados: '',
-  isrRetenidoMes: '',
-  iva_retenido: '',
+  const [form, setForm] = useState({
+    fecha: '',
+    rfc: '',
+    periodo: '',
 
-  actosRegionFronteriza: '',
-  actosTasa16: '',
+    conceptoIngresos: '',   // 👈 NUEVO
 
-  actosPagadosTasa16: '',          // 👈 NUEVO
-  actosPagadosRegionFronteriza: '',// 👈 NUEVO
-  actosPagadosExentos: '',         // 👈 NUEVO
+    ingresos: '',
+    gastos: '',
 
-  ivaCargo8: '',
-  ivaCargo16: '',
-  ivaCargo0: '',
-  
-  ivaAcred8: '',
-  ivaAcred16: '',
-  ivaAcred0: '',
+    comprasGastosFacturados: '',
+    isrRetenidoMes: '',
+    iva_retenido: '',
 
-  tasa0: '',
+    actosRegionFronteriza: '',
+    actosTasa16: '',
 
-  contrasena: '',
-});
+    actosPagadosTasa16: '',
+    actosPagadosRegionFronteriza: '',
+    actosPagadosExentos: '',
 
+    ivaCargo8: '',
+    ivaCargo16: '',
+    ivaCargo0: '',
+
+    ivaAcred8: '',
+    ivaAcred16: '',
+    ivaAcred0: '',
+
+    tasa0: '',
+
+    contrasena: '',
+  });
 
   const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -46,7 +55,7 @@ const [form, setForm] = useState({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-  
+
     const response = await fetch('/api/registros', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -56,24 +65,24 @@ const [form, setForm] = useState({
             k === 'fecha' ||
             k === 'rfc' ||
             k === 'periodo' ||
-            k === 'contrasena'
+            k === 'contrasena' ||
+            k === 'conceptoIngresos'   // 👈 IMPORTANTE
               ? [k, v]
               : [k, Number(v)]
           )
         )
       ),
     });
-  
+
     const data = await response.json();
-  
+
     if (!response.ok) {
       alert(data.error || 'Ocurrió un error al guardar');
       return;
     }
-  
+
     alert(data.message || 'Registro guardado correctamente');
   };
-
 
   return (
     <main className="min-vh-100 bg-light d-flex justify-content-center align-items-start p-4">
@@ -95,6 +104,19 @@ const [form, setForm] = useState({
               </div>
             </section>
 
+            {/* CONCEPTOS */}
+            <section className="mb-4">
+              <h5 className="mb-3 text-primary">Conceptos</h5>
+              <div className="row g-3">
+                <Select
+                  label="Total de ingresos efectivamente cobrados"
+                  name="conceptoIngresos"
+                  options={conceptosIngresos}
+                  onChange={handleChange}
+                />
+              </div>
+            </section>
+
             {/* INGRESOS / GASTOS */}
             <section className="mb-4">
               <h5 className="mb-3 text-primary">Ingresos y Gastos</h5>
@@ -104,26 +126,18 @@ const [form, setForm] = useState({
               </div>
             </section>
 
-            {/* ISR Y COMPRAS */}
+            {/* ISR */}
             <section className="mb-4">
               <h5 className="mb-3 text-primary">
                 ISR y Compras del Mes
               </h5>
               <div className="row g-3">
-                <Input
-                  label="ISR Retenido del Mes"
-                  name="isrRetenidoMes"
-                  onChange={handleChange}
-                />
-                <Input
-                  label="IVA Retenido"
-                  name="iva_retenido"
-                  onChange={handleChange}
-                />
+                <Input label="ISR Retenido del Mes" name="isrRetenidoMes" onChange={handleChange} />
+                <Input label="IVA Retenido" name="iva_retenido" onChange={handleChange} />
               </div>
             </section>
 
-            {/* ACTOS GRAVADOS */}
+            {/* ACTOS */}
             <section className="mb-4">
               <h5 className="mb-3 text-primary">
                 Actos o Actividades Gravados
@@ -139,32 +153,6 @@ const [form, setForm] = useState({
                   name="actosTasa16"
                   onChange={handleChange}
                 />
-              </div>
-            </section>
-
-            {/* ACTOS PAGADOS */}
-            <section className="mb-4">
-              <h5 className="mb-3 text-primary">
-                Actos o Actividades Pagados (Resumen)
-              </h5>
-              <div className="row g-3">
-                <Input
-                  label="Actos pagados a la tasa del 16%"
-                  name="actosPagadosTasa16"
-                  onChange={handleChange}
-                />
-                <Input
-                  label="Valor de los actos o actividades pagados sujetos al estímulo de la región fronteriza"
-                  name="actosPagadosRegionFronteriza"
-                  onChange={handleChange}
-                />
-              </div>
-            </section>
-
-            <section className="mb-4">
-              <h5 className="mb-3 text-primary">Tasa IVA 0</h5>
-              <div className="row g-3">
-                <Input label="Valor de los demás actos o actividades pagados a la tasa del 0%" name="tasa0" onChange={handleChange} />
               </div>
             </section>
 

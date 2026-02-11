@@ -14,6 +14,8 @@ export async function POST(req: Request) {
       rfc,
       periodo,
 
+      conceptoIngresos,
+
       ingresos,
       gastos,
       comprasGastosFacturados,
@@ -65,6 +67,8 @@ export async function POST(req: Request) {
       .input('rfc', sql.VarChar(13), rfc)
       .input('periodo', sql.VarChar(15), periodo)
 
+      .input('concepto_ingresos', sql.VarChar(255), conceptoIngresos)
+
       .input('ingresos', sql.Decimal(18, 2), ingresos)
       .input('gastos', sql.Decimal(18, 2), gastos)
       .input('comprasGastosFacturados', sql.Decimal(18, 2), comprasGastosFacturados)
@@ -99,6 +103,7 @@ export async function POST(req: Request) {
               Periodo = @periodo,
               Ingresos = @ingresos,
               Gastos = @gastos,
+              concepto_ingresos = @concepto_ingresos,
               ComprasGastosFacturados = @comprasGastosFacturados,
               IsrRetenidoMes = @isrRetenidoMes,
               iva_retenido = @iva_retenido,
@@ -126,6 +131,7 @@ export async function POST(req: Request) {
               Periodo,
               Ingresos,
               Gastos,
+              concepto_ingresos,
               ComprasGastosFacturados,
               IsrRetenidoMes,
               iva_retenido,
@@ -151,6 +157,7 @@ export async function POST(req: Request) {
               @periodo,
               @ingresos,
               @gastos,
+              @concepto_ingresos,
               @comprasGastosFacturados,
               @isrRetenidoMes,
               @iva_retenido,
