@@ -31,6 +31,7 @@ export default function Page() {
 
     actosRegionFronteriza: '',
     actosTasa16: '',
+    actividades0Tasa: '',
 
     actosPagadosTasa16: '',
     actosPagadosRegionFronteriza: '',
@@ -151,6 +152,11 @@ export default function Page() {
                 <Input
                   label="Valor de los actos o actividades pagados a la tasa del 16%"
                   name="actosTasa16"
+                  onChange={handleChange}
+                />
+                <Input
+                  label="Actividades gravadas a la tasa del 0%"
+                  name="actividades0Tasa"
                   onChange={handleChange}
                 />
               </div>

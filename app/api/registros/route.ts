@@ -24,6 +24,7 @@ export async function POST(req: Request) {
 
       actosRegionFronteriza,
       actosTasa16,
+      actividades0Tasa,
 
       actosPagadosTasa16,
       actosPagadosRegionFronteriza,
@@ -77,6 +78,7 @@ export async function POST(req: Request) {
 
       .input('actosRegionFronteriza', sql.Decimal(18, 2), actosRegionFronteriza)
       .input('actosTasa16', sql.Decimal(18, 2), actosTasa16)
+      .input('actividades0Tasa', sql.Decimal(18, 2), actividades0Tasa)
 
       .input('actosPagadosTasa16', sql.Decimal(18, 2), actosPagadosTasa16)
       .input('actosPagadosRegionFronteriza', sql.Decimal(18, 2), actosPagadosRegionFronteriza)
@@ -109,6 +111,7 @@ export async function POST(req: Request) {
               iva_retenido = @iva_retenido,
               ActosRegionFronteriza = @actosRegionFronteriza,
               ActosTasa16 = @actosTasa16,
+              Actividades0Tasa = @actividades0Tasa,
               ActosPagadosTasa16 = @actosPagadosTasa16,
               ActosPagadosRegionFronteriza = @actosPagadosRegionFronteriza,
               ActosPagadosExentos = @actosPagadosExentos,
@@ -137,6 +140,7 @@ export async function POST(req: Request) {
               iva_retenido,
               ActosRegionFronteriza,
               ActosTasa16,
+              Actividades0Tasa,
               ActosPagadosTasa16,
               ActosPagadosRegionFronteriza,
               ActosPagadosExentos,
@@ -163,6 +167,7 @@ export async function POST(req: Request) {
               @iva_retenido,
               @actosRegionFronteriza,
               @actosTasa16,
+              @actividades0Tasa,
               @actosPagadosTasa16,
               @actosPagadosRegionFronteriza,
               @actosPagadosExentos,
